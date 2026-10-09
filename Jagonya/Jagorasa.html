@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jago Rasa - Chinese & Japanese Food Autentik</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome untuk Ikon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- 1. VARIABEL WARNA & DASAR --- */
+        :root {
+            --primary-green: #388E3C;
+            --light-green: #66BB6A;
+            --secondary-orange: #F57C00;
+            --accent-red: #D32F2F;
+            --bg-cream: #FDFBF7;
+            --text-dark: #212121;
+            --text-light: #555555;
+            --gold: #FFC107;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: var(--bg-cream);
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+            color: var(--primary-green);
+        }
+
+        a { text-decoration: none; color: inherit; }
+
+        /* --- 2. NAVIGASI --- */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(253, 251, 247, 0.95);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-green);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo span { color: var(--secondary-orange); }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            list-style: none;
+        }
+
+        .nav-links a {
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover { color: var(--secondary-orange); }
+
+        .btn-nav {
+            background-color: var(--primary-green);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+
+        .btn-nav:hover { background-color: var(--secondary-orange); color: white; }
+
+        /* Mobile Menu */
+        .menu-toggle { display: none; font-size: 1.5rem; cursor: pointer; color: var(--primary-green); }
+
+        /* --- 3. HERO SECTION (EKSTERIOR) --- */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('GHX.jpeg') center/cover no-repeat;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+            margin-top: 60px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            color: white;
+        }
+
+        .hero-logo-placeholder {
+            width: 150px;
+            height: 150px;
+            background-color: white;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 5px solid var(--gold);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            /* Ganti background-image ini dengan logo asli */
+            background-image: url('https://via.placeholder.com/150x150?text=LOGO'); 
+            background-size: cover;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            color: var(--gold);
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            font-weight: 300;
+        }
+
+        .hero-buttons { display: flex; gap: 15px; justify-content: center; flex-wrap: wrap; }
+
+        .btn-primary {
+            background-color: var(--accent-red);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary:hover { background-color: #b71c1c; transform: translateY(-3px); box-shadow: 0 5px 15px rgba(211, 47, 47, 0.4); }
+
+        .btn-secondary {
+            background-color: transparent;
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1rem;
+            border: 2px solid white;
+            transition: all 0.3s;
+        }
+
+        .btn-secondary:hover { background-color: white; color: var(--primary-green); transform: translateY(-3px); }
+
+        /* --- 4. SECTION KEUNGGULAN --- */
+        .features {
+            padding: 80px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            text-align: center;
+        }
+
+        .feature-card {
+            padding: 30px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+            border-bottom: 4px solid var(--primary-green);
+        }
+
+        .feature-card:hover { transform: translateY(-10px); border-bottom-color: var(--secondary-orange); }
+
+        .feature-card i {
+            font-size: 2.5rem;
+            color: var(--secondary-orange);
+            margin-bottom: 20px;
+        }
+
+        .feature-card h3 { margin-bottom: 10px; font-size: 1.3rem; }
+
+        /* --- 5. SECTION MENU (INTERIOR) --- */
+        .menu-section {
+            padding: 80px 5%;
+            background-color: #fff;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-title h2 { font-size: 2.5rem; margin-bottom: 10px; }
+        .section-title p { color: var(--text-light); }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .menu-card {
+            background: var(--bg-cream);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s;
+        }
+
+        .menu-card:hover { transform: translateY(-5px); }
+
+        .menu-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .menu-info { padding: 20px; }
+
+        .menu-info h3 { font-size: 1.2rem; margin-bottom: 5px; }
+        .menu-info p { color: var(--text-light); font-size: 0.9rem; margin-bottom: 15px; }
+
+        .price {
+            font-weight: 700;
+            color: var(--accent-red);
+            font-size: 1.1rem;
+        }
+
+        /* --- 6. SECTION TENTANG KAMI --- */
+        .about-section {
+            padding: 80px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            flex-wrap: wrap;
+        }
+
+        .about-text { flex: 1; min-width: 300px; }
+        .about-text h2 { font-size: 2.5rem; margin-bottom: 20px; }
+        .about-text p { margin-bottom: 15px; color: var(--text-light); }
+
+        .about-image {
+            flex: 1;
+            min-width: 300px;
+            height: 400px;
+            border-radius: 20px;
+            background: url('Ceritakami.jpeg') center/cover;
+            box-shadow: 10px 10px 0 var(--gold);
+        }
+
+        /* --- 7. FOOTER --- */
+        footer {
+            background-color: var(--primary-green);
+            color: white;
+            padding: 60px 5% 20px;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-col h3 { color: var(--gold); margin-bottom: 20px; font-size: 1.3rem; }
+        .footer-col p, .footer-col a { color: #e0e0e0; margin-bottom: 10px; display: block; }
+        .footer-col a:hover { color: var(--gold); }
+
+        .social-links { display: flex; gap: 15px; margin-top: 15px; }
+        .social-links a {
+            background: rgba(255,255,255,0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+        .social-links a:hover { background: var(--gold); color: var(--primary-green); }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            font-size: 0.9rem;
+            color: #b0bec5;
+        }
+
+        /* --- 8. FLOATING WHATSAPP --- */
+        .wa-float {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            z-index: 1000;
+            transition: transform 0.3s;
+        }
+        .wa-float:hover { transform: scale(1.1); color: white; }
+
+        /* --- 9. RESPONSIVE (MOBILE) --- */
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                left: 0;
+                width: 100%;
+                background: white;
+                padding: 20px;
+                box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+            }
+            .nav-links.active { display: flex; }
+            .menu-toggle { display: block; }
+            .hero h1 { font-size: 2.2rem; }
+            .about-section { flex-direction: column; }
+            .about-image { width: 100%; height: 250px; }
+            .btn-nav { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGASI -->
+    <header>
+        <nav>
+            <div class="logo">
+                <!-- Ganti dengan logo asli jika ada -->
+                <i class="fas fa-dove"></i> Aman <span>Jago Rasa</span>
+            </div>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#menu">Menu</a></li>
+                <li><a href="#about">Tentang Kami</a></li>
+                <li><a href="#contact">Kontak</a></li>
+            </ul>
+            <a href="https://wa.me/6281234567890" class="btn-nav" target="_blank">Pesan Sekarang</a>
+            <div class="menu-toggle" onclick="toggleMenu()"><i class="fas fa-bars"></i></div>
+        </nav>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero" id="home">
+        <div class="hero-content">
+            <div class="hero-logo-placeholder"></div>
+            <h1>Jago Rasa</h1>
+            <p>Cita Rasa Autentik Chinese Food, Langsung dari Dapur Kami ke Meja Anda.</p>
+            <div class="hero-buttons">
+                <a href="#menu" class="btn-primary">Lihat Menu</a>
+                <a href="https://wa.me/6281234567890" class="btn-secondary" target="_blank">Pesan via WhatsApp</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- KEUNGGULAN -->
+    <section class="features">
+        <div class="feature-card">
+            <i class="fas fa-leaf"></i>
+            <h3>Bahan Selalu Segar</h3>
+            <p>Kami memilih bahan baku berkualitas setiap hari untuk menjaga cita rasa autentik.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-utensils"></i>
+            <h3>Resep Keluarga</h3>
+            <p>Racikan bumbu rahasia turun-temurun yang tidak akan kamu temukan di tempat lain.</p>
+        </div>
+        <div class="feature-card">
+            <i class="fas fa-heart"></i>
+            <h3>Dibuat dengan Cinta</h3>
+            <p>Setiap porsi dimasak dengan penuh dedikasi untuk kepuasan pelanggan kami.</p>
+        </div>
+    </section>
+
+    <!-- MENU ANDALAN -->
+    <section class="menu-section" id="menu">
+        <div class="section-title">
+            <h2>Menu Andalan Kami</h2>
+            <p>Pilihan favorit pelanggan yang wajib kamu coba</p>
+        </div>
+        <div class="menu-grid">
+            <!-- Menu 1 -->
+            <div class="menu-card">
+                <img src="NasiGoreng.jpeg" alt="NasiGoreng">
+                <div class="menu-info">
+                    <h3>Nasgor X.O Seafood</h3>
+                    <p>Nasi goreng udang dengan saus XO yang membuatnya semakin gurih dan segar antar perpaduan saus XO dengan udang </p>
+                    <span class="price">Rp 25.000</span>
+                </div>
+            </div>
+            <!-- Menu 2 -->
+            <div class="menu-card">
+                <img src="NasiA.jpeg" alt="NasiA">
+                <div class="menu-info">
+                    <h3>Nasi Ayam Kremes</h3>
+                    <p>Nasi ayam kremes dengan nasi yang cocok untuk pecinta daging ayam yang gurih dan lembut dimulut.</p>
+                    <span class="price">Rp 20.000</span>
+                </div>
+            </div>
+            <!-- Menu 3 -->
+            <div class="menu-card">
+                <img src="Fuyu.jpeg" alt="Fuyu">
+                <div class="menu-info">
+                    <h3>Fu Yunghai</h3>
+                    <p>Fu yunghai kasual dengan kacang polong di atasnya, serta siraman saus asam manis yang membuatnya wajib dicoba jika ingin mencoba menu kasual.</p>
+                    <span class="price">Rp 22.000</span>
+                </div>
+            </div>
+            <!-- Menu 4 -->
+            <div class="menu-card">
+                <img src="NasiCAP.jpeg" alt="NasiCAP">
+                <div class="menu-info">
+                    <h3>Nasi Capcay</h3>
+                    <p>Tumis sayuran segar yang melimpah dengan nasi putih dibawahnya.</p>
+                    <span class="price">Rp 30.000</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- TENTANG KAMI -->
+    <section class="about-section" id="about">
+        <div class="about-text">
+            <h2>Cerita Dapur Kami</h2>
+            <p>Berawal dari kecintaan keluarga kami pada masakan Tionghoa, <strong>Jago Rasa</strong> hadir untuk membawa kehangatan makanan rumahan ke meja Anda.</p>
+            <p>Kami percaya bahwa makanan yang enak lahir dari bahan yang segar dan proses memasak yang penuh ketelitian. Setiap hidangan yang kami sajikan adalah wujud dedikasi kami untuk keluarga Anda.</p>
+            <p>Mampir dan rasakan sendiri kelezatannya!</p>
+        </div>
+        <div class="about-image"></div>
+    </section>
+
+    <!-- FOOTER / KONTAK -->
+    <footer id="contact">
+        <div class="footer-content">
+            <div class="footer-col">
+                <h3>Jago Rasa</h3>
+                <p>Menyajikan cita rasa autentik Chinese Food dengan bahan-bahan pilihan.</p>
+                <div class="social-links">
+                    <a href="https://www.instagram.com/amanjagorasa/" target="_blank" rel="noopener noreferrer">
+    <i class="fab fa-instagram"></i>
+</a>
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-tiktok"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>Hubungi Kami</h3>
+                <p><i class="fas fa-map-marker-alt"></i> Jl. Pemurus Dalam Banjarmasin Selatan</p>
+                <p><i class="fas fa-phone"></i> +62 812 6021 189</p>
+                <p><i class="fas fa-envelope"></i> info@amanjagorasa.com</p>
+            </div>
+            <div class="footer-col">
+                <h3>Jam Buka</h3>
+                <p>Senin - Minggu: 11.00 - 20.45</p>
+                <p>Sabtu - Minggu ke-4 libur</p>
+            </div>
+        </div>
+        <div class="copyright">
+            &copy; 2014 Jago Rasa. All Rights Reserved.
+        </div>
+    </footer>
+
+    <!-- TOMBOL WHATSAPP FLOATING -->
+    <a href="https://wa.me/628126021189" class="wa-float" target="_blank">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- JAVASCRIPT UNTUK MOBILE MENU -->
+    <script>
+        function toggleMenu() {
+            const navLinks = document.getElementById('navLinks');
+            navLinks.classList.toggle('active');
+        }
+
+        // Efek scroll pada navbar
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.style.boxShadow = '0 4px 15px rgba(0,0,0,0.1)';
+                header.style.background = 'rgba(253, 251, 247, 0.98)';
+            } else {
+                header.style.boxShadow = '0 2px 10px rgba(0,0,0,0.05)';
+                header.style.background = 'rgba(253, 251, 247, 0.95)';
+            }
+        });
+    </script>
+</body>
+</html>
